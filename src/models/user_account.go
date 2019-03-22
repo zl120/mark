@@ -1,5 +1,9 @@
 package models
 
+import "github.com/astaxie/beego/orm"
+
+
+
 type UserAccount struct {
 	Id          int    `orm:(id)`
 	UserName    string `orm:(username)`
@@ -8,4 +12,10 @@ type UserAccount struct {
 	Status      int    `orm:(status)`
 	Description string `orm:(string)`
 	Role        int    `orm:(role)`
+}
+
+func (m *UserAccount) CreateUser() (int,error) {
+	var Orm orm.Ormer = orm.NewOrm()
+	id,err:=Orm.Insert(m)
+	return int(id), err
 }
